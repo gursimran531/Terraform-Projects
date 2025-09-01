@@ -4,7 +4,7 @@ terraform {
 
     workspaces {
       project = "Practice Project 1"
-      name = "practice-project-P1"
+      name    = "practice-project-P1"
     }
   }
 
