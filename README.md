@@ -14,7 +14,7 @@ Each project demonstrates progressively more complex **cloud infrastructure conc
 
 ## 📌 Projects Overview  
 
-### 1️⃣ [Project 1 – Basic EC2 Instance](./Terraform-ec2-VPC)  
+### 1️⃣ [Project 1 – Basic EC2 Instance](./Terraform-project1/)  
 - **Goal:** Provision an EC2 instance in the default VPC.  
 - **Concepts Covered:**  
   - Terraform basics (providers, resources, variables, outputs)  
@@ -23,7 +23,7 @@ Each project demonstrates progressively more complex **cloud infrastructure conc
 
 ---
 
-### 2️⃣ [Project 2 – Secure 2-Tier Infrastructure](./Terraform-2teir-Infra)  
+### 2️⃣ [Project 2 – Secure 2-Tier Infrastructure](./Terraform-2tier-Infra/)  
 - **Goal:** Design a secure VPC with private/public subnets, NAT gateway, and a bastion host.  
 - **Concepts Covered:**  
   - Custom VPC, subnets, route tables  
