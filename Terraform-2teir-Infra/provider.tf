@@ -3,22 +3,23 @@ terraform {
     organization = "Singhops"
 
     workspaces {
-      project = "Practice Project 1"
-      name    = "practice-project-P1"
+      project = "Terraform Project 2"
+      name    = "Terraform-VPC-BastionApp"
     }
   }
 
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 6.10.0"
+      version = "~> 6.11.0"
     }
   }
 
 
-  required_version = ">= 1.2.0"
+  required_version = ">= 1.13.0"
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = var.awsregion
 }
+
