@@ -27,7 +27,7 @@ This isn't just another EC2 deployment—it's a production-ready, security-first
 ## 📊 Architecture Diagram
 
 <p align="center">
-  <img src="./diagrams/Terraform_2tier_Architecture.drawio.svg" alt="Two-Tier Terraform AWS Architecture" width="600"/>
+  <img src="./diagrams/Terraform-2tier-infra.drawio.svg" alt="Two-Tier Terraform AWS Architecture" width="600"/>
 </p>
 
 ***
