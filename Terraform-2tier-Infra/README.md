@@ -88,8 +88,8 @@ Make sure you have these essentials ready:
    ssh -i your-key.pem ec2-user@<app-server-private-ip>
    ```
 
-<p align="center">
-  <img src="./pictures/ssh.jpg" alt="Architecture Diagram" width="250"/>
+<p align="left">
+  <img src="./pictures/ssh.jpg" alt="Architecture Diagram" width="400"/>
 </p>
 
 
@@ -215,8 +215,8 @@ Terraform-2tier-Infra/
 | `app_server_private_ip`  | Private IP address of the application server                   |
 | `eip_of_nat_gateway`     | Elastic IP associated with NAT Gateway                          |
 
-<p align="center">
-  <img src="./pictures/outputs.jpg" alt="Architecture Diagram" width="300"/>
+<p align="left">
+  <img src="./pictures/outputs.jpg" alt="Architecture Diagram" width="500"/>
 </p>
 
 
@@ -238,8 +238,8 @@ This project implements several layers of security:
 
 **Important:** Don't forget to destroy your infrastructure when you're done to avoid AWS charges!
 
-<p align="center">
-  <img src="./pictures/destroy.jpg" alt="Architecture Diagram" width="200"/>
+<p align="left">
+  <img src="./pictures/destroy.jpg" alt="Architecture Diagram" width="400"/>
 </p>
 
 
