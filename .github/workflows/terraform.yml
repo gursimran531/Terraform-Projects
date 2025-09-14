@@ -14,7 +14,7 @@ on:
   release:
     types: [published]
 
-  permissions:
+permissions:
     contents: read
     pull-requests: write
     issues: write
