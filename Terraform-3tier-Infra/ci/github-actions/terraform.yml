@@ -13,6 +13,12 @@ on:
       - 'Terraform-3tier-Infra/environments/dev/**'
   release:
     types: [published]
+    
+  permissions:
+    contents: read
+    pull-requests: write
+    issues: write
+
 
 jobs:
   terraform:
