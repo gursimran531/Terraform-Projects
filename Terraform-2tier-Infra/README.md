@@ -88,7 +88,7 @@ Make sure you have these essentials ready:
    ssh -i your-key.pem ec2-user@<app-server-private-ip>
    ```
 
-<p align="left">
+<p align="center">
   <img src="./pictures/ssh.jpg" alt="Architecture Diagram" width="400"/>
 </p>
 
