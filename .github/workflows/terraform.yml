@@ -1,0 +1,106 @@
+name: Terraform CI/CD
+
+on:
+  pull_request:
+    paths:
+      - 'Terraform-3tier-Infra/modules/**'
+      - 'Terraform-3tier-Infra/environments/dev/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'Terraform-3tier-Infra/modules/**'
+      - 'Terraform-3tier-Infra/environments/dev/**'
+  release:
+    types: [published]
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Terraform-3tier-Infra/environments/dev
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: '1.13.0'
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Initialize
+        id: init
+        run: terraform init
+
+      - name: Terraform Format Check
+        id: fmt
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        if: github.event_name == 'pull_request'
+        run: terraform plan -no-color | tee plan.txt
+        continue-on-error: true
+
+      - name: Comment Plan on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const planOutput = fs.readFileSync('Terraform-3tier-Infra/environments/dev/plan.txt', 'utf8');
+            const body = `#### Terraform Format and Style 🖌 \`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️ \`${{ steps.init.outcome }}\`
+            #### Terraform Validate ✅ \`${{ steps.validate.outcome }}\`
+            #### Terraform Plan 📖 \`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`hcl
+            ${planOutput}
+            \`\`\`
+
+            </details>
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body
+            });
+
+      - name: Terraform Plan Failure
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+
+      - name: Setup Go
+        if: github.event_name == 'pull_request'
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.23.0'
+
+      - name: Run Terratest
+        if: github.event_name == 'pull_request'
+        working-directory: Terraform-3tier-Infra/tests/integration
+        run: go test . -v -timeout 20m
+
+      - name: Terraform Apply - Dev
+        if: github.event_name == 'push'
+        run: terraform apply -auto-approve
+
+      - name: Terraform Apply - Prod
+        if: github.event_name == 'release'
+        working-directory: Terraform-3tier-Infra/environments/prod
+        run: |
+          terraform init
+          terraform apply -auto-approve
