@@ -5,12 +5,13 @@ on:
     paths:
       - 'Terraform-3tier-Infra/modules/**'
       - 'Terraform-3tier-Infra/environments/dev/**'
-  push:
-    branches:
-      - main
-    paths:
-      - 'Terraform-3tier-Infra/modules/**'
-      - 'Terraform-3tier-Infra/environments/dev/**'
+# Uncomment the push event to enable terraform apply on push to main branch
+# push:
+  #  branches:
+  #    - main
+  #  paths:
+  #    - 'Terraform-3tier-Infra/modules/**'
+  #    - 'Terraform-3tier-Infra/environments/dev/**'
   release:
     types: [published]
 
@@ -109,7 +110,3 @@ jobs:
         run: |
           terraform init
           terraform apply -auto-approve
-
-      - name: Terraform destroy - Dev
-        if: github.event_name == 'push'
-        run: terraform destroy -auto-approve

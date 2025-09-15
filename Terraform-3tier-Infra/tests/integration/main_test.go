@@ -19,8 +19,8 @@ func TestDevDeploy(t *testing.T) {
 
 	terraform.InitAndApply(t, opts)
 
-	// Get the output
-	fqDns := terraform.OutputRequired(t, opts, "Domain_Website")
+	// Get the output (string safe)
+	fqDns := terraform.Output(t, opts, "Domain_Website")
 	url := "http://" + fqDns
 
 	// Retry until healthy
