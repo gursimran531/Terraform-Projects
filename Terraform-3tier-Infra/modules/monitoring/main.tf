@@ -4,6 +4,7 @@ resource "random_id" "bucket_id" {
 }
 resource "aws_s3_bucket" "alb_logs" {
   bucket = "alb-logs-${var.environment}-${random_id.bucket_id.hex}"
+  force_destroy = true
 
   tags = merge(
     { Name = "ALB-Logs-${var.environment}" },
