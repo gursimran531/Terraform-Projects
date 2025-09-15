@@ -109,3 +109,7 @@ jobs:
         run: |
           terraform init
           terraform apply -auto-approve
+
+      - name: Terraform destroy - Dev
+        if: github.event_name == 'push'
+        run: terraform destroy -auto-approve
