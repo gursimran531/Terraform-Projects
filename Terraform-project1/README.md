@@ -45,8 +45,8 @@ First, make sure you have these tools installed and ready to go:
 1.  **Clone This Project**
     ```bash
     # Clone the repository to your local machine
-    git clone <your-repo-url>
-    cd <your-repo-name>
+    git clone https://github.com/gursimran531/Terraform-Projects.git
+    cd Terraform-project1
     ```
 
 2.  **Initialize Terraform**

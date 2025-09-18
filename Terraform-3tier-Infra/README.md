@@ -48,7 +48,7 @@ This is not just another Terraform project—it’s a **multi-tier, scalable arc
 
 1. **Clone the Repo**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/gursimran531/Terraform-Projects.git
    cd Terraform-3tier-Infra/environments/dev
    ```
 

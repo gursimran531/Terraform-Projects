@@ -34,13 +34,14 @@ Each project demonstrates progressively more complex **cloud infrastructure conc
 
 ---
 
-### 🔜 Project 3 – Advanced 3-Tier Architecture (Coming Soon)  
-- **Goal:** Build a production-style infra with load balancer, auto-scaling EC2s, and RDS database.  
+### 3️⃣ [Project 3 – Advanced 3-Tier Architecture](./Terraform-3tier-Infra/)  
+- **Goal:** Build a production-style infra with FQDN, load balancer, auto-scaling EC2s, and RDS database.  
 - **Concepts to be Covered:**  
   - Application Load Balancer in public subnet  
   - Auto-scaling group for app servers in private subnet  
   - RDS database in isolated subnet  
-  - More advanced modules and reusability  
+  - More advanced modules and reusability 
+  - Finally: A fully working domain to access the server
 
 ---
 

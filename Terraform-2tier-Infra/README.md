@@ -49,7 +49,7 @@ Make sure you have these essentials ready:
 1. **Clone This Project**
    ```bash
    # Clone the repository to your local machine
-   git clone <your-repo-url>
+   git clone https://github.com/gursimran531/Terraform-Projects.git
    cd Terraform-2tier-Infra
    ```
 
