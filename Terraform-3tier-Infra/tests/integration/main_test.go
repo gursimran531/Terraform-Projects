@@ -2,6 +2,7 @@ package test
 
 import (
 	"crypto/tls"
+	"strings"
 	"testing"
 	"time"
 
@@ -14,16 +15,22 @@ func TestDevDeploy(t *testing.T) {
 		TerraformDir: "../../environments/dev",
 	}
 
-	// Always destroy at the end
+	// Always clean up after test
 	defer terraform.Destroy(t, opts)
 
+	// Deploy infra
 	terraform.InitAndApply(t, opts)
 
-	// Get the output (string safe)
-	fqDns := terraform.OutputRequired(t, opts, "Domain_Website")
+	// Fetch domain output safely
+	fqDns, err := terraform.OutputRequiredE(t, opts, "Domain_Website")
+	if err != nil {
+		t.Fatalf("Failed to fetch Domain_Website output: %v", err)
+	}
+	fqDns = strings.TrimSpace(fqDns)
+
 	url := "http://" + fqDns
 
-	// Retry until healthy
+	// Retry loop until healthy
 	maxRetries := 10
 	sleep := 5 * time.Second
 	success := false

@@ -97,8 +97,8 @@ jobs:
 
       - name: Run Terratest
         if: github.event_name == 'pull_request'
-        working-directory: Terraform-3tier-Infra/tests/integration
-        run: go test . -v -timeout 20m
+        working-directory: Terraform-3tier-Infra/
+        run: go test ./tests/integration -v -timeout 20m
 
       - name: Terraform Apply - Dev
         if: github.event_name == 'push'
