@@ -2,7 +2,6 @@ package test
 
 import (
 	"crypto/tls"
-	"strings"
 	"testing"
 	"time"
 
@@ -21,12 +20,8 @@ func TestDevDeploy(t *testing.T) {
 	// Deploy infra
 	terraform.InitAndApply(t, opts)
 
-	// Fetch domain output safely
-	fqDns, err := terraform.OutputRequiredE(t, opts, "Domain_Website")
-	if err != nil {
-		t.Fatalf("Failed to fetch Domain_Website output: %v", err)
-	}
-	fqDns = strings.TrimSpace(fqDns)
+	// Get outputs
+	fqDns := terraform.OutputRequired(t, opts, "Domain_Website")
 
 	url := "http://" + fqDns
 
